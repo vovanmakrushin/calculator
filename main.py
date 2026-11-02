@@ -1,4 +1,4 @@
-# Автор: Владимир Макрушин, группа ПРЗ-23, 01.11.2026
+# Автор: Владимир Макрушин, группа ПРЗ-23, 02.11.2026
 
 """
 Главный модуль приложения Калькулятор.
@@ -28,6 +28,32 @@ def show_history():
     print("\n--- История вычислений ---")
     for record in history:
         print(f"  [{record[3]}] {record[1]} = {record[2]}")
+
+
+def show_statistics():
+    """Запрашивает и выводит статистические показатели базы данных вычислений."""
+    stats = db_manager.get_statistics()
+    print("\n--- Статистика базы данных вычислений ---")
+    print(f" Общее количество вычислений: {stats['total_count']}")
+    print(f" Среднее значение результатов: {stats['avg_value']}")
+    print(f" Самое большое значение результатов: {stats['max_value']}")
+    print(f" Самое маленькое значение результатов: {stats['min_value']}")
+    print("-----------------------------------------")
+
+
+def execute_search():
+    """Получает ключевое слово от пользователя и выводит результаты поиска."""
+    keyword = input("Введите поисковый запрос (например, число '5' или 'sqrt'): ").strip()
+    results = db_manager.search_history(keyword)
+    
+    print(f"\n--- Результаты поиска по запросу '{keyword}' ---")
+    if not results:
+        print("Записи, соответствующие критериям поиска, не найдены.")
+        return
+        
+    for record in results:
+        print(f"  [{record[3]}] {record[1]} = {record[2]}")
+    print(f"Всего найдено совпадений: {len(results)}")
 
 
 def perform_calculation():
@@ -95,6 +121,8 @@ def main():
         print("1. Выполнить вычисление")
         print("2. Показать историю (последние 10)")
         print("3. Очистить историю")
+        print("4. Показать статистику")
+        print("5. Поиск по истории")
         print("0. Выход")
         
         choice = input("Выберите действие: ").strip()
@@ -109,6 +137,10 @@ def main():
         elif choice == '3':
             db_manager.clear_history()
             print("История очищена.")
+        elif choice == '4':
+            show_statistics()
+        elif choice == '5':
+            execute_search()
         else:
             print("Неверный выбор. Попробуйте снова.")
 
