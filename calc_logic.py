@@ -46,3 +46,12 @@ def square_root(a: float) -> float:
     if a < 0:
         raise ValueError("Ошибка: Нельзя извлечь корень из отрицательного числа!")
     return math.sqrt(a)
+
+def modulo(a: float, b: float) -> float:
+    """
+    Вычисляет остаток от деления первого числа на второе.
+    Вызывает ValueError, если делитель равен 0.
+    """
+    if b == 0:
+        raise ValueError("Ошибка: Деление на ноль невозможно!")
+    return a % b

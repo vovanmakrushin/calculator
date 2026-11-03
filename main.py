@@ -1,4 +1,4 @@
-# Автор: Владимир Макрушин, группа ПРЗ-23, 02.11.2026
+# Автор: Владимир Макрушин, группа ПРЗ-23, 03.11.2026
 
 """
 Главный модуль приложения Калькулятор.
@@ -60,11 +60,11 @@ def perform_calculation():
     """Функция проведения одного вычисления и сохранения его в базу данных."""
     # Запрос операции с расширенным выбором
     while True:
-        operation = input("Выберите операцию (+, -, *, /, **, sqrt): ").strip()
-        if operation in ['+', '-', '*', '/', '**', 'sqrt']:
+        operation = input("Выберите операцию (+, -, *, /, **, sqrt, %): ").strip()
+        if operation in ['+', '-', '*', '/', '**', 'sqrt', '%']:
             break
         else:
-            print("Ошибка: Неподдерживаемая операция. Используйте только: +, -, *, /, ** или sqrt.")
+            print("Ошибка: Неподдерживаемая операция. Используйте только: +, -, *, /, **, sqrt или %.")
 
     # Запрос чисел в зависимости от операции
     if operation == 'sqrt':
@@ -85,6 +85,8 @@ def perform_calculation():
             result = calc_logic.power(num1, num2)
         elif operation == '/':
             result = calc_logic.divide(num1, num2)
+        elif operation == '%':
+            result = calc_logic.modulo(num1, num2)
         elif operation == 'sqrt':
             result = calc_logic.square_root(num1)
         else:
