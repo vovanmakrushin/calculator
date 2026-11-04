@@ -16,3 +16,8 @@ Thumbs.db
 *.sqlate
 *.sqlite3
 
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
